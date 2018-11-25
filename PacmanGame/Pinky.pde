@@ -147,6 +147,7 @@ class Pinky {
       if (frightened) {//eaten by pacman
         returnHome = true;
         frightened = false;
+        score += ghostScore;
       } else if (!returnHome) {//killPacman
         pacman.kill();
       }

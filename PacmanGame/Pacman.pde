@@ -5,7 +5,7 @@ class Pacman {
   //when pacman reaches a node its velocity changes to the value stored in turnto
   PVector turnTo = new PVector(-1, 0);
   boolean turn = false;
-  int score = 0;
+  // int score = 0;
   int lives = 2;
   boolean  gameOver = false;
   //---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -77,7 +77,7 @@ class Pacman {
       //check if the position has been eaten or not, note the blank spaces are initialised as already eaten
       if (!tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].eaten) {
         tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].eaten =true;
-        score +=1;//add a point
+        score += 1; //add a point
         if (tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].bigDot) {//if big dot eaten
           //set all ghosts to frightened
           blinky.frightened = true;
@@ -109,9 +109,10 @@ class Pacman {
         PVector matrixPosition = new PVector((pos.x+10*vel.x-8)/16, (pos.y+10*vel.y-8)/16);//convert that position to an array position
         if (!tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].eaten ) {//if that tile has not been eaten 
           tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].eaten =true;//eat it
-          score +=1;
-          println("Score:", score);
+          
           if (tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].bigDot) {//big dot eaten
+            print("big dot");
+            score += bigDotScore;
             //set all ghosts as frightened
             blinky.frightened = true;
             blinky.flashCount = 0;
@@ -121,7 +122,10 @@ class Pacman {
             pinky.flashCount = 0;
             inky.frightened = true;
             inky.flashCount = 0;
+          } else {
+            score += dotScore;
           }
+          println("Score:", score);
         }
       }
       if (turnTo.x + vel.x == 0 && vel.y + turnTo.y ==0) {//if turning chenging directions entirely i.e. 180 degree turn

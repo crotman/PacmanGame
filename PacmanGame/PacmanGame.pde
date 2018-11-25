@@ -3,6 +3,11 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+int score = 0;
+int dotScore = 1;
+int bigDotScore = 10;
+int ghostScore = 100;
+
 Pacman pacman;
 PImage img;//background image 
 
@@ -105,6 +110,11 @@ void draw() {
 
     //show pacman last so he appears over the path lines
     pacman.show();
+
+    fill(255);
+    stroke(255);
+    textAlign(LEFT, TOP);
+    text("Score: " + score, 0, 0);
   }
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
