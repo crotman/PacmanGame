@@ -26,9 +26,27 @@ class Pacman {
   //---------------------------------------------------------------------------------------------------------------------------------------------------------
   //move pacman if not facing wall
   void move() {
-    if (checkPosition()) {
+    if (this.checkPosition()) {
       pos.add(vel);
+      this.turn = false;
     }
+  }
+  
+  void moveTo(String direction) {
+    switch(direction) {
+      case "UP":
+        pacman.turnTo = new PVector(0, -1); break;
+      case "RIGHT":
+        pacman.turnTo = new PVector(1, 0); break;
+      case "DOWN":
+        pacman.turnTo = new PVector(0, 1); break;
+      case "LEFT":
+        pacman.turnTo = new PVector(-1, 0); break;
+      default:
+        print("Invalid direction " + direction);
+    }
+    
+    pacman.turn = true;
   }
 
   //---------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -39,6 +57,18 @@ class Pacman {
       return true;
     }
     return false;
+  }
+
+  String direction() {
+    if (turnTo.x == 0 && turnTo.y == -1) {
+      return "UP";
+    } else if (turnTo.x == 0 && turnTo.y == 1) {
+      return "DOWN";
+    } else if (turnTo.x == -1 && turnTo.y == 0) {
+      return "LEFT";
+    } else {
+      return "RIGHT";
+    }
   }
   
   
@@ -57,6 +87,7 @@ class Pacman {
       inky = new Inky();
       vel = new PVector(-1, 0);
       turnTo = new PVector(-1, 0);
+      agent.reset();
     }
   }
 
@@ -77,7 +108,7 @@ class Pacman {
       //check if the position has been eaten or not, note the blank spaces are initialised as already eaten
       if (!tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].eaten) {
         tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].eaten =true;
-        score += 1; //add a point
+        score += dotScore;
         if (tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].bigDot) {//if big dot eaten
           //set all ghosts to frightened
           blinky.frightened = true;

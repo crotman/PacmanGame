@@ -11,10 +11,12 @@ int ghostScore = 100;
 Pacman pacman;
 PImage img;//background image 
 
-Pinky pinky;
-Blinky blinky;
-Clyde clyde;
-Inky inky;
+Agent agent = new Agent();
+
+Ghost pinky;
+Ghost blinky;
+Ghost clyde;
+Ghost inky;
 Tile[][] tiles = new Tile[31][28]; //note it goes y then x because of how I inserted the data
 int[][] tilesRepresentation = { 
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
@@ -110,6 +112,7 @@ void draw() {
 
     //show pacman last so he appears over the path lines
     pacman.show();
+    agent.movePacman();
 
     fill(255);
     stroke(255);
@@ -120,27 +123,27 @@ void draw() {
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
 void keyPressed() {//controls for pacman
-  switch(key) {
-  case CODED:
-    switch(keyCode) {
-    case UP:
-      pacman.turnTo = new PVector(0, -1);
-      pacman.turn = true;
-      break;
-    case DOWN:
-      pacman.turnTo = new PVector(0, 1);
-      pacman.turn = true;
-      break;
-    case LEFT:
-      pacman.turnTo = new PVector(-1, 0);
-      pacman.turn = true;
-      break;
-    case RIGHT:
-      pacman.turnTo = new PVector(1, 0);
-      pacman.turn = true;
-      break;
-    }
-  }
+  // switch(key) {
+  // case CODED:
+  //   switch(keyCode) {
+  //   case UP:
+  //     pacman.turnTo = new PVector(0, -1);
+  //     pacman.turn = true;
+  //     break;
+  //   case DOWN:
+  //     pacman.turnTo = new PVector(0, 1);
+  //     pacman.turn = true;
+  //     break;
+  //   case LEFT:
+  //     pacman.turnTo = new PVector(-1, 0);
+  //     pacman.turn = true;
+  //     break;
+  //   case RIGHT:
+  //     pacman.turnTo = new PVector(1, 0);
+  //     pacman.turn = true;
+  //     break;
+  //   }
+  // }
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
