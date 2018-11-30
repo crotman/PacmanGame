@@ -10,7 +10,8 @@ int ghostScore = 100;
 
 int posicaoLinha = 0;
 StringList lihas = new StringList();  
-PrintWriter output = createWriter("linhas.txt"); 
+PrintWriter output = createWriter("Posicoes.txt"); 
+
 
 Pacman pacman;
 PImage img;//background image 
@@ -135,13 +136,15 @@ void draw() {
     
     //"inky" + inky.posicao().toString() + "clyde" + clyde.posicao().toString() + "pinky" + pinky.posicao().toString() + "blinky" + blinky.posicao().toString() + "pacman" + pacman.posicao().toString() + "gameOver:" + pacman.gameOver() + "vidas:" + pacman.vidas()
     lihas.append(inky.posicao().toString() + ";" + clyde.posicao().toString() + ";" + pinky.posicao().toString() + ";" + blinky.posicao().toString() + ";" + pacman.posicao().toString() + ";" + pacman.gameOver() + ";" + pacman.vidas());           
-  }
   
+
   //salvar arquivo  
   for (String element : lihas) 
     { 
-      println(element);
-    }    
+      output.println(element); // Write the coordinate to the file
+    }   
+    
+  }
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
