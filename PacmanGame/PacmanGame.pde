@@ -112,7 +112,7 @@ void draw() {
 
     //show pacman last so he appears over the path lines
     pacman.show();
-    agent.movePacman();
+    // agent.movePacman();
 
     fill(255);
     stroke(255);
@@ -123,27 +123,27 @@ void draw() {
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
 void keyPressed() {//controls for pacman
-  // switch(key) {
-  // case CODED:
-  //   switch(keyCode) {
-  //   case UP:
-  //     pacman.turnTo = new PVector(0, -1);
-  //     pacman.turn = true;
-  //     break;
-  //   case DOWN:
-  //     pacman.turnTo = new PVector(0, 1);
-  //     pacman.turn = true;
-  //     break;
-  //   case LEFT:
-  //     pacman.turnTo = new PVector(-1, 0);
-  //     pacman.turn = true;
-  //     break;
-  //   case RIGHT:
-  //     pacman.turnTo = new PVector(1, 0);
-  //     pacman.turn = true;
-  //     break;
-  //   }
-  // }
+  switch(key) {
+  case CODED:
+    switch(keyCode) {
+    case UP:
+      inky.turnTo = new PVector(0, -1);
+      inky.turn = true;
+      break;
+    case DOWN:
+      inky.turnTo = new PVector(0, 1);
+      inky.turn = true;
+      break;
+    case LEFT:
+      inky.turnTo = new PVector(-1, 0);
+      inky.turn = true;
+      break;
+    case RIGHT:
+      inky.turnTo = new PVector(1, 0);
+      inky.turn = true;
+      break;
+    }
+  }
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 

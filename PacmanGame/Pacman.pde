@@ -94,32 +94,13 @@ class Pacman {
   //-------------------------------------------------------------------------------------------------------------------------------------------------
   //returns whether pacman can move i.e. there is no wall in the direction of vel
   boolean checkPosition() {
-
     if ((pos.x-8)%16 == 0 && (pos.y - 8)% 16 ==0) {//if on a critical position
-
       PVector matrixPosition = new PVector((pos.x-8)/16, (pos.y - 8)/16);//convert position to an array position
-
-      //reset all the paths for all the ghosts  
-      blinky.setPath();
-      pinky.setPath();
-      clyde.setPath();
-      inky.setPath(); 
       
       //check if the position has been eaten or not, note the blank spaces are initialised as already eaten
       if (!tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].eaten) {
         tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].eaten =true;
         score += dotScore;
-        if (tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].bigDot) {//if big dot eaten
-          //set all ghosts to frightened
-          blinky.frightened = true;
-          blinky.flashCount = 0;
-          clyde.frightened = true;
-          clyde.flashCount = 0;
-          pinky.frightened = true;
-          pinky.flashCount = 0;
-          inky.frightened = true;
-          inky.flashCount = 0;
-        }
       }
       
       
@@ -144,15 +125,6 @@ class Pacman {
           if (tiles[floor(matrixPosition.y)][floor(matrixPosition.x)].bigDot) {//big dot eaten
             print("big dot");
             score += bigDotScore;
-            //set all ghosts as frightened
-            blinky.frightened = true;
-            blinky.flashCount = 0;
-            clyde.frightened = true;
-            clyde.flashCount = 0;
-            pinky.frightened = true;
-            pinky.flashCount = 0;
-            inky.frightened = true;
-            inky.flashCount = 0;
           } else {
             score += dotScore;
           }
