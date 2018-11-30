@@ -107,8 +107,8 @@ void draw() {
     pinky.show();
     pinky.move();
 
-    blinky.show();
-    blinky.move();
+    // blinky.show();
+    // blinky.move();
 
     //show pacman last so he appears over the path lines
     pacman.show();
@@ -123,27 +123,28 @@ void draw() {
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
 void keyPressed() {//controls for pacman
-  switch(key) {
-  case CODED:
-    switch(keyCode) {
-    case UP:
-      inky.turnTo = new PVector(0, -1);
-      inky.turn = true;
-      break;
-    case DOWN:
-      inky.turnTo = new PVector(0, 1);
-      inky.turn = true;
-      break;
-    case LEFT:
-      inky.turnTo = new PVector(-1, 0);
-      inky.turn = true;
-      break;
-    case RIGHT:
-      inky.turnTo = new PVector(1, 0);
-      inky.turn = true;
-      break;
-    }
+  if (key == CODED && inky != null) {
+    if (keyCode == UP) inky.moveTo("UP");
+    if (keyCode == RIGHT) inky.moveTo("RIGHT");
+    if (keyCode == DOWN) inky.moveTo("DOWN");
+    if (keyCode == LEFT) inky.moveTo("LEFT");
   }
+  
+  if (clyde != null) {
+    if (keyCode == 87) clyde.moveTo("UP"); // w
+    if (keyCode == 65) clyde.moveTo("LEFT"); // a
+    if (keyCode == 83) clyde.moveTo("DOWN"); // s
+    if (keyCode == 68) clyde.moveTo("RIGHT"); // d
+  }
+
+  if (pinky != null) {
+    if (keyCode == 85) pinky.moveTo("UP"); // u
+    if (keyCode == 72) pinky.moveTo("LEFT"); // h
+    if (keyCode == 74) pinky.moveTo("DOWN"); // j
+    if (keyCode == 75) pinky.moveTo("RIGHT"); // k
+  }
+
+  print("keyCode: " + keyCode);
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
