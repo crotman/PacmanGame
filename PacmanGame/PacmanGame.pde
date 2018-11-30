@@ -8,6 +8,10 @@ int dotScore = 1;
 int bigDotScore = 10;
 int ghostScore = 100;
 
+int posicaoLinha = 0;
+StringList lihas = new StringList();  
+PrintWriter output = createWriter("linhas.txt"); 
+
 Pacman pacman;
 PImage img;//background image 
 
@@ -18,6 +22,7 @@ Ghost blinky;
 Ghost clyde;
 Ghost inky;
 Tile[][] tiles = new Tile[31][28]; //note it goes y then x because of how I inserted the data
+
 int[][] tilesRepresentation = { 
   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, 
   {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1}, 
@@ -53,13 +58,20 @@ int[][] tilesRepresentation = {
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
 void setup() {
+  
   frameRate(100);
+  
   size(448, 496);
+  
   img = loadImage("map.jpg");
+  
   //initiate tiles
   for (int i = 0; i< 28; i++) {
+    
     for (int j = 0; j< 31; j++) {
+      
       tiles[j][i] = new Tile(16*i +8, 16*j+8);
+      
       switch(tilesRepresentation[j][i]) {
       case 1: //1 is a wall
         tiles[j][i].wall = true;
@@ -86,20 +98,22 @@ void setup() {
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
 void draw() {
+  
   image(img, 0, 0);
   if (!pacman.gameOver) {
     stroke(255);
 
     for (int i = 0; i< 28; i++) {
       for (int j = 0; j< 31; j++) {
-        tiles[j][i].show();
+        tiles[j][i].show();        
       }
     }
+                   
     pacman.move();
 
     //move and show the ghosts
     inky.show();
-    inky.move();
+    inky.move();    
 
     clyde.show();
     clyde.move();
@@ -118,32 +132,41 @@ void draw() {
     stroke(255);
     textAlign(LEFT, TOP);
     text("Score: " + score, 0, 0);
+    
+    //"inky" + inky.posicao().toString() + "clyde" + clyde.posicao().toString() + "pinky" + pinky.posicao().toString() + "blinky" + blinky.posicao().toString() + "pacman" + pacman.posicao().toString() + "gameOver:" + pacman.gameOver() + "vidas:" + pacman.vidas()
+    lihas.append(inky.posicao().toString() + ";" + clyde.posicao().toString() + ";" + pinky.posicao().toString() + ";" + blinky.posicao().toString() + ";" + pacman.posicao().toString() + ";" + pacman.gameOver() + ";" + pacman.vidas());           
   }
+  
+  //salvar arquivo  
+  for (String element : lihas) 
+    { 
+      println(element);
+    }    
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
 void keyPressed() {//controls for pacman
-  // switch(key) {
-  // case CODED:
-  //   switch(keyCode) {
-  //   case UP:
-  //     pacman.turnTo = new PVector(0, -1);
-  //     pacman.turn = true;
-  //     break;
-  //   case DOWN:
-  //     pacman.turnTo = new PVector(0, 1);
-  //     pacman.turn = true;
-  //     break;
-  //   case LEFT:
-  //     pacman.turnTo = new PVector(-1, 0);
-  //     pacman.turn = true;
-  //     break;
-  //   case RIGHT:
-  //     pacman.turnTo = new PVector(1, 0);
-  //     pacman.turn = true;
-  //     break;
-  //   }
-  // }
+   //switch(key) {
+   //case CODED:
+   //  switch(keyCode) {
+   //  case UP:
+   //    pacman.turnTo = new PVector(0, -1);
+   //    pacman.turn = true;
+   //    break;
+   //  case DOWN:
+   //    pacman.turnTo = new PVector(0, 1);
+   //    pacman.turn = true;
+   //    break;
+   //  case LEFT:
+   //    pacman.turnTo = new PVector(-1, 0);
+   //    pacman.turn = true;
+   //    break;
+   //  case RIGHT:
+   //    pacman.turnTo = new PVector(1, 0);
+   //    pacman.turn = true;
+   //    break;
+   //  }
+   //}
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -154,10 +177,15 @@ PVector getNearestNonWallTile(PVector target) {
   float min = 1000;
   int minIndexj = 0;
   int minIndexi = 0;
+  
   for (int i = 0; i< 28; i++) {//for each tile
+  
     for (int j = 0; j< 31; j++) {
+    
       if (!tiles[j][i].wall) {//if its not a wall
+      
         if (dist(i, j, target.x, target.y)<min) { //if its the current closest to target
+        
           min =  dist(i, j, target.x, target.y);
           minIndexj = j;
           minIndexi = i;

@@ -32,6 +32,21 @@ class Pacman {
     }
   }
   
+  PVector posicao()
+  {
+    return pos;
+  }   
+  
+  boolean gameOver()
+  {
+    return gameOver;
+  }
+  
+  int vidas()
+  {
+    return lives;
+  }
+  
   void moveTo(String direction) {
     switch(direction) {
       case "UP":

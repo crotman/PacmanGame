@@ -13,16 +13,20 @@ class Tile {
 //draw a dot if there is one in this tile
   void show() {
     if (dot) {
+      
       if (!eaten) {//draw dot
         fill(255, 255, 0);
         noStroke();
         ellipse(pos.x, pos.y, 3, 3);
+        
       }
     } else if (bigDot) {
+      
       if (!eaten) {//draw big dot
         fill(255, 255, 0);
         noStroke();
         ellipse(pos.x, pos.y, 6, 6);
+        
       }
     }
   }
